@@ -18,7 +18,7 @@ require_once 'DB/Sql.php';
  * Requires the table to have a field to handle the positions.
  *
  * <code>
- * $position = new Ilib_Position('cms_page', 'site_id='.$cmssite->get('id'), 'position', 'id');
+ * $position_set = new Ilib_Position($db, 1, "table_name", "sprog = $session_sprog", "position", "id");
  * $position->moveUp();
  * </code>
  *
@@ -37,10 +37,6 @@ class Ilib_Position
 
     /**
      * Constructor
-     *
-     * <code>
-     * $position_set = new Ilib_Position($db, 1, "table_name", "sprog = $session_sprog", "position", "id");
-     * </code>
      *
      * @param string  $db            Database connection
      * @param string  $table         Navnet på tabellen i databasen
