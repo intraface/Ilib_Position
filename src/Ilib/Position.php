@@ -5,7 +5,7 @@
  * PHP Version 4 and 5
  *
  * @category Database
- * @package  Position
+ * @package  Ilib_Position
  * @author   Sune Jensen <sj@sunet.dk>
  * @author   Lars Olesen <lars@legestue.net>
  *
@@ -18,12 +18,12 @@ require_once 'DB/Sql.php';
  * Requires the table to have a field to handle the positions.
  *
  * <code>
- * $position = new Position('cms_page', 'site_id='.$cmssite->get('id'), 'position', 'id');
+ * $position = new Ilib_Position('cms_page', 'site_id='.$cmssite->get('id'), 'position', 'id');
  * $position->moveUp();
  * </code>
  *
  * @category Database
- * @package  Position
+ * @package  Ilib_Position
  * @author   Sune Jensen <sj@sunet.dk>
  * @author   Lars Olesen <lars@legestue.net>
  */
@@ -39,7 +39,7 @@ class Ilib_Position
      * Constructor
      *
      * <code>
-     * $position_set = new Position("indhold_site", "barn_af = 0 AND sprog = $session_sprog", "position", "id");
+     * $position_set = new Ilib_Position("indhold_site", "barn_af = 0 AND sprog = $session_sprog", "position", "id");
      * </code>
      *
      * @param string  $tabel         Navnet på tabellen i databasen
