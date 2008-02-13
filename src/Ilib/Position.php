@@ -43,14 +43,14 @@ class Ilib_Position
      * </code>
      *
      * @param string  $tabel         Navnet på tabellen i databasen
-     * @param string  $ekstrawhere   Bruges til at sætte ekstraparameter i SQL-sætning. Uden "AND" i starten af strengen.
+     * @param integer $id            The id for the stuff to move
+     * @param string  $ekstrawhere   @todo should this perhaps be an array? Bruges til at sætte ekstraparameter i SQL-sætning. Uden "AND" i starten af strengen.
      * @param string  $positionsfelt Indeholder navnet der indeholder postens position, ofte position
      * @param string  $idfelt        Unikt felt for tabellen. Ofte id.
-     * @param integer $id            The id for the stuff to move
      *
      * @return void
      */
-    function __construct($tabel = '', $ekstrawhere = '', $positionsfelt = 'position', $idfelt = 'id', $id)
+    function __construct($tabel = '', $id, $ekstrawhere = '', $positionsfelt = 'position', $idfelt = 'id')
     {
         $this->tabel         = $tabel;
         $this->ekstrawhere   = $ekstrawhere;

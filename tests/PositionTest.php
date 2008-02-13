@@ -74,7 +74,7 @@ class PositionTest extends PHPUnit_Framework_TestCase
 
     function createPosition($id = 0)
     {
-        return new Ilib_Position($this->table, '', 'position', 'id', $id);
+        return new Ilib_Position($this->table, $id, '', 'position', 'id');
     }
 
     function insertPosts()
