@@ -39,7 +39,7 @@ class Ilib_Position
      * Constructor
      *
      * <code>
-     * $position_set = new Ilib_Position("indhold_site", "barn_af = 0 AND sprog = $session_sprog", "position", "id");
+     * $position_set = new Ilib_Position($db, 1, "table_name", "sprog = $session_sprog", "position", "id");
      * </code>
      *
      * @param string  $db            Database connection
