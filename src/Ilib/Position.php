@@ -42,7 +42,8 @@ class Ilib_Position
      * $position_set = new Ilib_Position("indhold_site", "barn_af = 0 AND sprog = $session_sprog", "position", "id");
      * </code>
      *
-     * @param string  $tabel         Navnet på tabellen i databasen
+     * @param string  $db            Database connection
+     * @param string  $table         Navnet på tabellen i databasen
      * @param integer $id            The id for the stuff to move
      * @param string  $ekstrawhere   @todo should this perhaps be an array? Bruges til at sætte ekstraparameter i SQL-sætning. Uden "AND" i starten af strengen.
      * @param string  $positionsfelt Indeholder navnet der indeholder postens position, ofte position
@@ -50,13 +51,14 @@ class Ilib_Position
      *
      * @return void
      */
-    function __construct($tabel = '', $id, $ekstrawhere = '', $positionsfelt = 'position', $idfelt = 'id')
+    function __construct($db, $table, $id, $ekstrawhere = '', $positionsfelt = 'position', $idfelt = 'id')
     {
-        $this->tabel         = $tabel;
+        $this->db            = $db;
+        $this->id            = intval($id);
+        $this->tabel         = $table;
         $this->ekstrawhere   = $ekstrawhere;
         $this->positionsfelt = $positionsfelt;
         $this->idfelt        = $idfelt;
-        $this->id            = intval($id);
     }
 
     /**
