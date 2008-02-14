@@ -61,12 +61,12 @@ class PositionTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($position->getPosition(), $id + 1);
     }
 
-    function testMoveTo()
+    function testMoveToPosition()
     {
         $id = 3;
         $position = $this->createPosition($id);
         $pos = 6;
-        $this->assertTrue($position->moveTo($pos));
+        $this->assertTrue($position->moveToPosition($pos));
         $this->assertEquals($position->getPosition(), $pos);
     }
 
