@@ -5,7 +5,7 @@
     <taskdef classname="phing.tasks.ext.FtpDeployTask" name="ftpdeploy" />
 
     <property name="package-name" value="${phing.project.name}" />
-    <property name="version" value="0.1.0" />
+    <property name="version" value="0.2.0" />
     <property name="stability" value="alpha" />
     <property name="pear.channel" value="public.intraface.dk" />
 
@@ -56,7 +56,10 @@
                          minimum_version="0.0.1" />
             </dependencies>
             <notes>
-                * Initial release as PEAR package
+                * Changed order of parameters in constructor
+                * Changed maxpos() to maxPosition()
+                * Changed moveTo() to moveToPosition()
+                * Removed setWhere()
             </notes>
         </d51pearpkg2>
     </target>
