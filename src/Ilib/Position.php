@@ -280,7 +280,7 @@ class Ilib_Position
      *
      * @return  integer Returnere tal med den højeste position
      */
-    function maxpos()
+    function maxPosition()
     {
         $db = new DB_Sql;
 
