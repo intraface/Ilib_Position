@@ -58,22 +58,6 @@ class Ilib_Position
     }
 
     /**
-     * Bruges til at ændre $ekstrawhere parameteren
-     *
-     * <code>
-     * $position_set->newWhere("barn_af = 1 AND sprog = $session_sprog");
-     * </code>
-     *
-     * @param string $ekstrawhere Ny where sætning. Uden "AND" i starten
-     *
-     * @return void
-     */
-    function setWhere($ekstrawhere)
-    {
-        $this->ekstrawhere = $ekstrawhere;
-    }
-
-    /**
      * Gets the position for an id
      *
      * @return mixed
@@ -207,7 +191,7 @@ class Ilib_Position
      *
      * @return boolean
      */
-    function moveTo($position)
+    function moveToPosition($position)
     {
         // først lægger vi en til alle posterne fra det nummer denne post vil have
         $this->reposition($position, $position+1);
