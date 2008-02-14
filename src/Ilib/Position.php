@@ -157,7 +157,7 @@ class Ilib_Position
         $sql = "SELECT $this->positionsfelt, $this->idfelt FROM $this->tabel WHERE $this->idfelt = $this->id $ekstrawhere LIMIT 1";
         $db->query($sql);
         if ($db->nextRecord()) {
-            if ($db->f($this->positionsfelt) == $this->maxpos()) {
+            if ($db->f($this->positionsfelt) == $this->maxPosition()) {
                 //trigger_error("Denne er allerede nederst, så den kunne ikke flyttes ned", E_USER_WARNING);
                 return false;
             } else {
@@ -230,7 +230,7 @@ class Ilib_Position
             $ekstrawhere = '';
         }
 
-        $maxpos = $this->maxpos() + 1;
+        $maxpos = $this->maxPosition() + 1;
 
         $sql = "UPDATE " . $this->tabel . " SET " . $this->positionsfelt . " = " . $maxpos . " WHERE " . $this->idfelt . " = ".$this->id . $ekstrawhere;
         $db->query($sql);
@@ -275,7 +275,7 @@ class Ilib_Position
      * Finder den højeste position
      *
      * <code>
-     * $position->maxpos();
+     * $position->maxPosition();
      * </code>
      *
      * @return  integer Returnere tal med den højeste position
