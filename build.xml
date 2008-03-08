@@ -5,7 +5,7 @@
     <taskdef classname="phing.tasks.ext.FtpDeployTask" name="ftpdeploy" />
 
     <property name="package-name" value="${phing.project.name}" />
-    <property name="version" value="0.2.0" />
+    <property name="version" value="0.3.0" />
     <property name="stability" value="alpha" />
     <property name="pear.channel" value="public.intraface.dk" />
 
@@ -30,11 +30,11 @@
     <target name="pear" depends="export">
         <d51pearpkg2 dir="${build.dir}/" baseinstalldir="/">
             <name>${package-name}</name>
-            <summary>Filehandler</summary>
+            <summary>Ilib_Position</summary>
             <channel>${pear.channel}</channel>
             <description>
                 <!--        Don't exceed this width         -->
-                Filehandler
+                Ilib_Position
             </description>
 
             <lead user="lsolesen" name="Lars Olesen" email="lars@legestue.net" />
@@ -56,10 +56,7 @@
                          minimum_version="0.0.1" />
             </dependencies>
             <notes>
-                * Changed order of parameters in constructor
-                * Changed maxpos() to maxPosition()
-                * Changed moveTo() to moveToPosition()
-                * Removed setWhere()
+                * Changed maxPosition() to getMaxPosition()
             </notes>
         </d51pearpkg2>
     </target>

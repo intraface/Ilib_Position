@@ -47,7 +47,7 @@ class Ilib_Position
      *
      * @return void
      */
-    function __construct($db, $table, $id, $ekstrawhere = '', $positionsfelt = 'position', $idfelt = 'id')
+    public function __construct($db, $table, $id, $ekstrawhere = '', $positionsfelt = 'position', $idfelt = 'id')
     {
         $this->db            = $db;
         $this->id            = intval($id);
@@ -62,7 +62,7 @@ class Ilib_Position
      *
      * @return mixed
      */
-    function getPosition()
+    public function getPosition()
     {
         if ($this->ekstrawhere != '') {
             $ekstrawhere = " AND ".$this->ekstrawhere;
@@ -88,7 +88,7 @@ class Ilib_Position
      *
      * @return boolean
      */
-    function moveUp()
+    public function moveUp()
     {
         $db = new DB_Sql;
         $db2 = new DB_Sql;
@@ -140,7 +140,7 @@ class Ilib_Position
      *
      * @return boolean
      */
-    function moveDown()
+    public function moveDown()
     {
         $db = new DB_Sql;
         $db2 = new DB_Sql;
@@ -157,7 +157,7 @@ class Ilib_Position
         $sql = "SELECT $this->positionsfelt, $this->idfelt FROM $this->tabel WHERE $this->idfelt = $this->id $ekstrawhere LIMIT 1";
         $db->query($sql);
         if ($db->nextRecord()) {
-            if ($db->f($this->positionsfelt) == $this->maxPosition()) {
+            if ($db->f($this->positionsfelt) == $this->getMaxPosition()) {
                 //trigger_error("Denne er allerede nederst, så den kunne ikke flyttes ned", E_USER_WARNING);
                 return false;
             } else {
@@ -191,7 +191,7 @@ class Ilib_Position
      *
      * @return boolean
      */
-    function moveToPosition($position)
+    public function moveToPosition($position)
     {
         // først lægger vi en til alle posterne fra det nummer denne post vil have
         $this->reposition($position, $position+1);
@@ -220,7 +220,7 @@ class Ilib_Position
      *
      * @return boolean
      */
-    function moveToMax()
+    public function moveToMax()
     {
         $db = new DB_Sql;
 
@@ -230,7 +230,7 @@ class Ilib_Position
             $ekstrawhere = '';
         }
 
-        $maxpos = $this->maxPosition() + 1;
+        $maxpos = $this->getMaxPosition() + 1;
 
         $sql = "UPDATE " . $this->tabel . " SET " . $this->positionsfelt . " = " . $maxpos . " WHERE " . $this->idfelt . " = ".$this->id . $ekstrawhere;
         $db->query($sql);
@@ -249,7 +249,7 @@ class Ilib_Position
      *
      * @return void
      */
-    function reposition($start_from_position = 0, $new_position = 1)
+    private function reposition($start_from_position = 0, $new_position = 1)
     {
         $db = new DB_Sql;
         $db2 = new DB_Sql;
@@ -275,12 +275,12 @@ class Ilib_Position
      * Finder den højeste position
      *
      * <code>
-     * $position->maxPosition();
+     * $position->getMaxPosition();
      * </code>
      *
      * @return  integer Returnere tal med den højeste position
      */
-    function maxPosition()
+    public function getMaxPosition()
     {
         $db = new DB_Sql;
 
