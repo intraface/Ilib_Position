@@ -29,10 +29,29 @@ require_once 'DB/Sql.php';
  */
 class Ilib_Position
 {
+    /**
+     * @var string
+     */
     private $tabel;
+
+    /**
+     * @var string
+     */
     private $ekstrawhere;
+
+    /**
+     * @var string
+     */
     private $postionsfelt;
+
+    /**
+     * @var string
+     */
     private $idfelt;
+
+    /**
+     * @var integer
+     */
     private $id;
 
     /**
