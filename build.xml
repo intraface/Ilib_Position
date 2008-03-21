@@ -25,10 +25,24 @@
     <target name="export">
         <echo msg="Exporting SVN files" />
         <exec command="svn export ${source.dir}/src ${build.dir}" />
+
+        <mkdir dir="${build.dir}/package/${package-name}-${version}" />
+        <copy todir="${build.dir}/package/${package-name}-${version}">
+            <filterchain>
+                <replacetokens begintoken="@@" endtoken="@@">
+                    <token key="VERSION" value="${version}" />
+                </replacetokens>
+            </filterchain>
+
+            <fileset dir="${build.dir}">
+                <include name="Ilib/**" />
+            </fileset>
+        </copy>
+
     </target>
 
     <target name="pear" depends="export">
-        <d51pearpkg2 dir="${build.dir}/" baseinstalldir="/">
+        <d51pearpkg2 dir="${build.dir}/package/${package-name}-${version}/" baseinstalldir="/">
             <name>${package-name}</name>
             <summary>Ilib_Position</summary>
             <channel>${pear.channel}</channel>
@@ -61,21 +75,14 @@
         </d51pearpkg2>
     </target>
 
-    <target name="build" depends="prepare, export, test, phpcs, php-documentor, make-pearpackage">
+    <target name="build" depends="prepare, export, test, phpcs, php-documentor, make-pear-package">
     </target>
 
-    <target name="make-pearpackage" depends="pear">
-        <echo msg="Creating PEAR archive file for ${package-name}" />
-        <mkdir dir="${build.dir}/${package-name}-${version}" />
-        <copy todir="${build.dir}/${package-name}-${version}">
-            <fileset dir="${build.dir}">
-                <include name="**" />
-            </fileset>
-        </copy>
-        <tar compression="gzip" destfile="${build.dir}/${package-name}-${version}.tgz" basedir="${build.dir}" />
+    <target name="make-pear-package" depends="pear">
+        <tar compression="gzip" destfile="${build.dir}/${package-name}-${version}.tgz" basedir="${build.dir}/package" />
     </target>
 
-    <target name="deploy" depends="make-pearpackage">
+    <target name="deploy" depends="pear">
         <property file="./build.properties" />
         <peardeploy uri="${pear.channel.uri}" username="${pear.channel.username}" password="${pear.channel.password}">
               <fileset dir="${build.dir}">
@@ -96,7 +103,7 @@
 
     <target name="php-documentor" depends="export">
         <exec dir="${source.dir}" command="phpdoc -ue on -t ${api.dir} -d ./src" passthru="true" />
-   </target>
+    </target>
 
     <target name="test">
         <exec dir="${tests.dir}" command="phpunit
