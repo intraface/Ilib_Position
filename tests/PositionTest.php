@@ -5,7 +5,7 @@ require_once 'PHPUnit/Framework.php';
 PHPUnit_Util_Filter::addDirectoryToWhitelist(realpath(dirname(__FILE__) . '/../src/'));
 
 require_once 'MDB2.php';
-require_once 'Ilib/Position.php';
+require_once '../src/Ilib/Position.php';
 
 class PositionTest extends PHPUnit_Framework_TestCase
 {
