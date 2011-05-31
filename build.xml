@@ -4,7 +4,7 @@
     <taskdef classname="phing.tasks.ext.IlibPearDeployerTask" name="peardeploy" />
 
     <property name="package-name" value="${phing.project.name}" />
-    <property name="version" value="0.4.0" />
+    <property name="version" value="0.4.1" />
     <property name="stability" value="alpha" />
     <property name="pear.channel" value="public.intraface.dk" />
 
@@ -23,8 +23,8 @@
     </target>
 
     <target name="export">
-        <echo msg="Exporting SVN files" />
-        <exec command="svn export ${source.dir}/src ${build.dir}/temp" />
+        <echo msg="Cloning git repository" />
+        <exec command="git clone git://github.com/intraface/Ilib_Position.git ${build.dir}/temp" />
         <mkdir dir="${build.dir}/package/${package-name}-${version}" />
         <copy todir="${build.dir}/package/${package-name}-${version}">
             <filterchain>
@@ -32,7 +32,7 @@
                     <token key="VERSION" value="${version}" />
                 </replacetokens>
             </filterchain>
-            <fileset dir="${build.dir}/temp">
+            <fileset dir="${build.dir}/temp/src">
                 <include name="**" />
             </fileset>
         </copy>
@@ -41,11 +41,10 @@
     <target name="pear" depends="export">
         <d51pearpkg2 dir="${build.dir}/package/${package-name}-${version}/" baseinstalldir="/">
             <name>${package-name}</name>
-            <summary>Ilib_Position</summary>
+            <summary>Makes positioning of database rows possible</summary>
             <channel>${pear.channel}</channel>
             <description>
-                
-                Ilib_Position
+                Used to order database rows in a particular order.
             </description>
             <lead user="lsolesen" name="Lars Olesen" email="lars@legestue.net" />
             <lead user="sune.t.jensen" name="Sune Jensen" email="sj@sunet.dk" />
@@ -57,9 +56,9 @@
             <dependencies>
                 <php minimum_version="5.2.0" />
                 <pear minimum_version="1.6.0" recommended_version="1.6.1" />
-                <package name="DB_Sql" channel="public.intraface.dk" recommended_version="0.0.1" minimum_version="0.0.1" />
+                <package name="DB_Sql" channel="public.intraface.dk" minimum_version="0.0.1" />
             </dependencies>
-            <notes>* Removed require_once</notes>
+            <notes>* QA Release</notes>
         </d51pearpkg2>
     </target>
 
@@ -93,11 +92,9 @@
 
     <target name="test">
         <exec dir="${tests.dir}" command="phpunit
-           --log-xml ${reports.phpunit.dir}/phpunit.xml
-           --log-pmd ${reports.phpunit.dir}/phpunit.pmd.xml
-           --coverage-xml ${reports.phpunit.dir}/phpunit.coverage.xml
+           --log-junit ${reports.phpunit.dir}/phpunit.xml
            --coverage-html ${reports.coverage.dir}/
-           PositionTest" passthru="true" checkreturn="true" />
+           ." passthru="true" checkreturn="true" />
     </target>
 
 </project>
