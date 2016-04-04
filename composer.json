@@ -1,0 +1,34 @@
+{
+  "name": "intraface/position",
+    "type": "library",
+    "description": "Library for handling position in database",
+    "homepage": "https://github.com/intraface/Ilib_Position",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Lars Olesen",
+            "email": "lars@intraface.dk"
+        },
+        {
+          "name": "Sune T. Jensen",
+          "email": "sune@intraface.dk"
+        }
+    ],
+   "autoload": {
+        "classmap": [
+            "src/"
+        ]
+    },
+    "autoload-dev": {
+        "classmap": [
+            "tests/"
+        ]
+    },
+    "require": {
+        "php": ">=5.3.2"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "4.4.*",
+        "squizlabs/php_codesniffer": "2.*"
+    }
+}
